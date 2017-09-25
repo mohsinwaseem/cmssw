@@ -270,33 +270,37 @@ mu8diEle12CaloIdLTrackIdL_dz.numGenericTriggerEventPSet.hltPaths = cms.vstring("
 mu8diEle12CaloIdLTrackIdL_dz.denGenericTriggerEventPSet.hltPaths = cms.vstring("HLT_Mu8_DiEle12_CaloIdL_TrackIdL_v*")
 
 ###############################Higgs Monitor HLT##############################################
+
+from DQMOffline.Trigger.HLTEGTnPMonitor_cfi import egmGsfElectronIDsForDQM
+
 higgsMonitorHLT = cms.Sequence(
-    higgsinvHLTJetMETmonitoring
-  + higgsHLTDiphotonMonitoring
-  + higgstautauHLTVBFmonitoring
-  + higgsTrielemon
-  + higgsTrimumon
-  + higgsTrimu10_5_5_dz_mon
-  + ele23Ele12CaloIdLTrackIdLIsoVL_dzmon
-  + mu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZ_eleleg
-  + mu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZ_muleg
-  + mu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZ_eleleg
-  + mu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZ_muleg
-  + mu8diEle12CaloIdLTrackIdL_muleg
-  + mu8diEle12CaloIdLTrackIdL_eleleg
-  + mu8diEle12CaloIdLTrackIdL_dz
-  + diMu9Ele9CaloIdLTrackIdL_muleg
-  + diMu9Ele9CaloIdLTrackIdL_eleleg
-  + diMu9Ele9CaloIdLTrackIdL_dz
-  + PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1_METmonitoring
-  + PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1_METmonitoring
-  + PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1_TOPmonitoring
-  + PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1_METmonitoring
-  + PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1_TOPmonitoring
-  + PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1_METmonitoring
-  + PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1_TOPmonitoring
-  + PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1_METmonitoring
-  + PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1_TOPmonitoring
-  + mssmHbbBtagTriggerMonitor 
-  + mssmHbbMonitorHLT 
-)
+    egmGsfElectronIDsForDQM # Use of electron VID requires this module being executed first
+    + higgsinvHLTJetMETmonitoring
+    + higgsHLTDiphotonMonitoring
+    + higgstautauHLTVBFmonitoring
+    + higgsTrielemon
+    + higgsTrimumon
+    + higgsTrimu10_5_5_dz_mon
+    + ele23Ele12CaloIdLTrackIdLIsoVL_dzmon
+    + mu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZ_eleleg
+    + mu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZ_muleg
+    + mu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZ_eleleg
+    + mu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZ_muleg
+    + mu8diEle12CaloIdLTrackIdL_muleg
+    + mu8diEle12CaloIdLTrackIdL_eleleg
+    + mu8diEle12CaloIdLTrackIdL_dz
+    + diMu9Ele9CaloIdLTrackIdL_muleg
+    + diMu9Ele9CaloIdLTrackIdL_eleleg
+    + diMu9Ele9CaloIdLTrackIdL_dz
+    + PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1_METmonitoring
+    + PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1_METmonitoring
+    + PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1_TOPmonitoring
+    + PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1_METmonitoring
+    + PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1_TOPmonitoring
+    + PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1_METmonitoring
+    + PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1_TOPmonitoring
+    + PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1_METmonitoring
+    + PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1_TOPmonitoring
+    + mssmHbbBtagTriggerMonitor 
+    + mssmHbbMonitorHLT 
+    )

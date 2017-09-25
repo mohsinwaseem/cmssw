@@ -557,9 +557,11 @@ AK8PFJetFwd500.histoPSet.jetEtaBinning = cms.vdouble(-5.0,-4.7,-4.4,-4.1,-3.8,-3
 AK8PFJetFwd500.histoPSet.jetEtaBinning2D = cms.vdouble(-5.0,-4.7,-4.4,-4.1,-3.8,-3.5,-3.2,-2.9,-2.7,-2.4,-2.1,0.0,2.1,2.4,2.7,2.9,3.2,3.5,3.8,4.1,4.4,4.7,5.0)
 AK8PFJetFwd500.histoPSet.etaPSet = cms.PSet(nbins=cms.uint32(50), xmin=cms.double(-5.0), xmax=cms.double(5.0))
 
+from DQMOffline.Trigger.HLTEGTnPMonitor_cfi import egmGsfElectronIDsForDQM
 
 btagMonitorHLT = cms.Sequence(
-    BTagMu_AK4DiJet20_Mu5
+    egmGsfElectronIDsForDQM # Use of electron VID requires this module being executed first
+    + BTagMu_AK4DiJet20_Mu5
     + BTagMu_AK4DiJet40_Mu5
     + BTagMu_AK4DiJet70_Mu5
     + BTagMu_AK4DiJet110_Mu5    

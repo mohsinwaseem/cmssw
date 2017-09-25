@@ -80,6 +80,9 @@ hltBTVmonitoring.histoPSet.phiBinning2D = cms.vdouble(-3.1416,-1.8849,-0.6283,0.
 hltBTVmonitoring.met       = cms.InputTag("pfMetEI") # pfMet
 hltBTVmonitoring.jets      = cms.InputTag("ak4PFJetsCHS") # ak4PFJets, ak4PFJetsCHS, pfJetsEI
 hltBTVmonitoring.electrons = cms.InputTag("gedGsfElectrons") # while pfIsolatedElectronsEI are reco::PFCandidate !
+#ATHER                                                                                                                                                                                                                                       
+hltBTVmonitoring.elecID    = cms.InputTag("egmGsfElectronIDsForDQM:cutBasedElectronID-Summer16-80X-V1-medium") #Electron ID      
+
 hltBTVmonitoring.muons     = cms.InputTag("muons") # while pfIsolatedMuonsEI are reco::PFCandidate !
 
 # Marina

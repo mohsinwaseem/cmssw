@@ -620,9 +620,11 @@ fullyhadronic_DoubleBTag_DeepCSV_bjet.histoPSet.HTBinning    = cms.vdouble(0,420
 fullyhadronic_DoubleBTag_DeepCSV_bjet.numGenericTriggerEventPSet.hltPaths = cms.vstring('HLT_PFHT380_SixPFJet32_DoublePFBTagDeepCSV_2p2_v*')
 fullyhadronic_DoubleBTag_DeepCSV_bjet.denGenericTriggerEventPSet.hltPaths = cms.vstring('HLT_PFHT380_SixPFJet32_v*')
 
+from DQMOffline.Trigger.HLTEGTnPMonitor_cfi import egmGsfElectronIDsForDQM
 
 topMonitorHLT = cms.Sequence(
-    topEleJet_ele
+    egmGsfElectronIDsForDQM # Use of electron VID requires this module being executed first
+    + topEleJet_ele
     + topEleJet_jet
     + topEleJet_all
     + topEleHT_ele

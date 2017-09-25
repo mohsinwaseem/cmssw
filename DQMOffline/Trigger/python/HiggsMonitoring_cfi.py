@@ -91,6 +91,9 @@ hltHIGmonitoring.histoPSet.phiBinning2D = cms.vdouble(-3.1416,-2.5132,-1.8849,-1
 hltHIGmonitoring.met       = cms.InputTag("pfMetEI") # pfMet
 hltHIGmonitoring.jets      = cms.InputTag("pfJetsEI") # ak4PFJets, ak4PFJetsCHS
 hltHIGmonitoring.electrons = cms.InputTag("gedGsfElectrons") # while pfIsolatedElectronsEI are reco::PFCandidate !
+#ATHER
+hltHIGmonitoring.elecID    = cms.InputTag("egmGsfElectronIDsForDQM:cutBasedElectronID-Summer16-80X-V1-medium") #Electron ID 
+
 hltHIGmonitoring.muons     = cms.InputTag("muons") # while pfIsolatedMuonsEI are reco::PFCandidate !
 hltHIGmonitoring.vertices  = cms.InputTag("offlinePrimaryVertices")
 

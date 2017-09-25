@@ -74,10 +74,12 @@ SingleJet30_Mu12_SinglePFJet40.jetSelection = cms.string('pt>40 & abs(eta)<2.2')
 SingleJet30_Mu12_SinglePFJet40.numGenericTriggerEventPSet.hltPaths = cms.vstring('SingleJet30_Mu12_SinglePFJet40_v*')
 SingleJet30_Mu12_SinglePFJet40.histoPSet.jetPtBinning = cms.vdouble(0,250,280,300,320,360,400,700,1000,1500)
 
+from DQMOffline.Trigger.HLTEGTnPMonitor_cfi import egmGsfElectronIDsForDQM
 
 mssmHbbMonitorHLT = cms.Sequence(
-    #full-hadronic
-    DoubleJets100_DoubleBtagCSV_0p92_DoublePFJets110MaxDeta1p6
+    egmGsfElectronIDsForDQM # Use of electron VID requires this module being executed first
+    #full-hadronic    
+    + DoubleJets100_DoubleBtagCSV_0p92_DoublePFJets110MaxDeta1p6
     + DoubleJets100_DoubleBtagCSV_0p92_DoublePFJets116MaxDeta1p6
     + DoubleJets100_DoubleBtagCSV_0p92_DoublePFJets128MaxDeta1p6
     #semileptonic

@@ -16,10 +16,11 @@
 
 TopMonitor::TopMonitor( const edm::ParameterSet& iConfig ) :
   folderName_             ( iConfig.getParameter<std::string>("FolderName") )
-  , metToken_             ( consumes<reco::PFMETCollection>      (iConfig.getParameter<edm::InputTag>("met")       ) )
-  , jetToken_             ( mayConsume<reco::PFJetCollection>      (iConfig.getParameter<edm::InputTag>("jets")      ) )
-  , eleToken_             ( mayConsume<edm::View<reco::GsfElectron> >(iConfig.getParameter<edm::InputTag>("electrons") ) )
-  , muoToken_             ( mayConsume<reco::MuonCollection>       (iConfig.getParameter<edm::InputTag>("muons")     ) )
+  , metToken_             ( consumes<reco::PFMETCollection>                     (iConfig.getParameter<edm::InputTag>("met")       ) )
+  , jetToken_             ( mayConsume<reco::PFJetCollection>                   (iConfig.getParameter<edm::InputTag>("jets")      ) )
+  , eleToken_             ( mayConsume<edm::View<reco::GsfElectron> >           (iConfig.getParameter<edm::InputTag>("electrons") ) )
+  , eleIDToken_           ( consumes<edm::ValueMap<bool> >                      (iConfig.getParameter<edm::InputTag>("elecID")    ) ) //ATHER
+  , muoToken_             ( mayConsume<reco::MuonCollection>       (iConfig.getParameter<edm::InputTag>("muons")       ) )
   // Marina
   , jetTagToken_          ( mayConsume<reco::JetTagCollection>     (iConfig.getParameter<edm::InputTag>("btagalgo") ))
   //Suvankar
@@ -503,14 +504,27 @@ void TopMonitor::analyze(edm::Event const& iEvent, edm::EventSetup const& iSetup
       edm::LogWarning("TopMonitor") << "Electron handle not valid \n";
       return;
   }
+
+  //ATHER
+  edm::Handle<edm::ValueMap<bool> > eleIDHandle;
+  iEvent.getByToken(eleIDToken_,  eleIDHandle);
+  if (!eleIDHandle.isValid()){
+      edm::LogWarning("TopMonitor") << "Electron ID handle not valid \n";
+      return;
+  }
+  
   std::vector<reco::GsfElectron> electrons;
   if (nelectrons_>0){
       if ( eleHandle->size() < nelectrons_ ) return;
+      size_t index=0;                          //ATHER
       for ( auto const & e : *eleHandle ) {
-          if (eleSelection_(e)) electrons.push_back(e);
-          //Suvankar
-          if ( usePVcuts_ &&
-               (std::fabs(e.gsfTrack()->dxy(pv->position())) >= lepPVcuts_.dxy || std::fabs(e.gsfTrack()->dz(pv->position())) >= lepPVcuts_.dz) ) continue;
+	const auto el = eleHandle->ptrAt(index);  //ATHER
+	bool pass_id = (*eleIDHandle)[el];   //ATHER
+	if (eleSelection_(e) && pass_id) electrons.push_back(e); //ATHER
+	//Suvankar
+	if ( usePVcuts_ &&
+	     (std::fabs(e.gsfTrack()->dxy(pv->position())) >= lepPVcuts_.dxy || std::fabs(e.gsfTrack()->dz(pv->position())) >= lepPVcuts_.dz) ) continue;
+	index++;  //ATHER
       }
       if ( electrons.size() < nelectrons_ ) return;
   }

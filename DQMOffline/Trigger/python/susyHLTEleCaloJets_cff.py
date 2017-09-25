@@ -291,23 +291,26 @@ susyEle23CaloIdMJet30_all.histoPSet.jetPtBinning2D = cms.vdouble(0,30,35,40,50,6
 susyEle23CaloIdMJet30_all.numGenericTriggerEventPSet.hltPaths = cms.vstring('HLT_Ele23_CaloIdM_TrackIdM_PFJet30_v*')
 # susyEle23CaloIdMJet30_all.denGenericTriggerEventPSet.hltPaths = cms.vstring('HLT_IsoMu24_v*')
 
+from DQMOffline.Trigger.HLTEGTnPMonitor_cfi import egmGsfElectronIDsForDQM
+
 susyHLTEleCaloJets = cms.Sequence(
-    susyEle8CaloJet30_ele
-  + susyEle8CaloJet30_jet
-  + susyEle8CaloJet30_all
-  + susyEle12CaloJet30_ele
-  + susyEle12CaloJet30_jet
-  + susyEle12CaloJet30_all
-  + susyEle23CaloJet30_ele
-  + susyEle23CaloJet30_jet
-  + susyEle23CaloJet30_all
-  + susyEle8CaloIdMJet30_ele
-  + susyEle8CaloIdMJet30_jet
-  + susyEle8CaloIdMJet30_all
-  + susyEle17CaloIdMJet30_ele
-  + susyEle17CaloIdMJet30_jet
-  + susyEle17CaloIdMJet30_all
-  + susyEle23CaloIdMJet30_ele
-  + susyEle23CaloIdMJet30_jet
-  + susyEle23CaloIdMJet30_all
-)
+    egmGsfElectronIDsForDQM # Use of electron VID requires this module being executed first
+    + susyEle8CaloJet30_ele
+    + susyEle8CaloJet30_jet
+    + susyEle8CaloJet30_all
+    + susyEle12CaloJet30_ele
+    + susyEle12CaloJet30_jet
+    + susyEle12CaloJet30_all
+    + susyEle23CaloJet30_ele
+    + susyEle23CaloJet30_jet
+    + susyEle23CaloJet30_all
+    + susyEle8CaloIdMJet30_ele
+    + susyEle8CaloIdMJet30_jet
+    + susyEle8CaloIdMJet30_all
+    + susyEle17CaloIdMJet30_ele
+    + susyEle17CaloIdMJet30_jet
+    + susyEle17CaloIdMJet30_all
+    + susyEle23CaloIdMJet30_ele
+    + susyEle23CaloIdMJet30_jet
+    + susyEle23CaloIdMJet30_all
+    )
